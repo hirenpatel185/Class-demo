@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * @author <ENTER YOUR NAME HERE>
+ * @author <Hirenkumar Patel>
  */
 public class CPD3314Assign6 {
 
@@ -35,16 +35,31 @@ public class CPD3314Assign6 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO: This is a sandbox. 
+        int choice;
+        Scanner sc = new Scanner(System.in);
+        do {
+            System.out.println(""
+                    + "1.Car Class\n"
+                    + "2.\n"
+                    + "3.\n"
+                    + "0.Exit\n");
+            System.out.println("Enter Your Choice:");
+            choice = sc.nextInt();
+            switch(choice)
+            {
+                case 1:
+                    doExercise2();
+                    break;
+                case 2:
+                    doExercise7();
+                    break;
+                case 3: 
+                    doExercise10();
+                    break;
+                default: return;
+            }
 
-        /* Modify it and use it to call whatever objects and methods you want.
-         * 
-         * To be clear: Your task is to create methods. All of the automated
-         * tests in CPD3314Assign6Test.java are based on the classes described
-         * below or in other files. So for example, in Ex#2, you must build the 
-         * Car class. The automated tests will tell you if you built it correctly.
-         *
-         */
+        } while (choice != 0);
     }
 
     /* Exercise #2 - Car Class
@@ -70,8 +85,16 @@ public class CPD3314Assign6 {
      * brake method, get the current speed of the car and display it.
      * - Gaddis pg. 400-1
      */
-    public void doExercise2() {
-        // TODO: Complete the main-class portion of Exercise #2 here
+    public static void doExercise2() {
+        int i;
+        Car car = new Car(2015, "Ford");
+        for (i = 0; i < 5; i++) {
+            System.out.println("current speed of the car" + car.accelerate());
+        }
+        for (i = 0; i < 5; i++) {
+            System.out.println("current speed of the car" + car.brake());
+        }
+
     }
 
     /* Exercise #7 - Circle Class
@@ -96,11 +119,21 @@ public class CPD3314Assign6 {
      * then reporting the circle's area, diameter, and circumference.
      * - Gaddis pg- 402
      */
-    public void doExercise7() {
-        // TODO: Complete the main-class portion of Exercise #7 here
-    }
+    
+     public  static void doExercise7() {
+         double radius;
+         Scanner sc=new Scanner(System.in);
+         System.out.println("Enter radius of Circle :");
+         radius=sc.nextDouble();
+         
+         Circle circle=new Circle(radius);
+         System.out.println("Area of Circle :"+circle.getArea());
+         System.out.println("Diameter of Circle :"+circle.getDiameter());
+         System.out.println("Circulference of Circle :"+circle.getCircumference());
+     
+     }
 
-    /* Exercise #10 & 11 - SavingsAccount Class
+     /* Exercise #10 & 11 - SavingsAccount Class
      * 
      * Design a SavingsAccount class that stores a savings account's annual 
      * interest rate and balance. The class constructor should accept the amount 
@@ -117,49 +150,51 @@ public class CPD3314Assign6 {
      * are on the right track.
      * - Gaddis pg- 403-4
      */
-    public void doExercise10() {
-        Scanner kb = new Scanner(System.in);
-        System.out.println("What is the annual interest rate? (eg- 0.013)");
-        double annualRate = kb.nextDouble();
-        System.out.println("What is the starting balance? (eg- 10000)");
-        double balance = kb.nextDouble();
-        SavingsAccount sa = new SavingsAccount(annualRate, balance);
-        System.out.println("How many months have passed since the account was "
-                + "established?");
-        int months = kb.nextInt();
-        double deposits = 0;
-        double withdrawals = 0;
-        for (int i = 1; i <= months; i++) {
-            System.out.println("How much was deposited in month " + i + "?");
-            double deposit = kb.nextDouble();
-            sa.deposit(deposit);
-            System.out.println("How much was withdrawn in month " + i + "?");
-            double withdrawal = kb.nextDouble();
-            sa.withdraw(withdrawal);
-            sa.calculateInterest();
-        }
-        System.out.printf("Ending Balance: %.2f\n", sa.getBalance());
-        System.out.printf("Total Deposits: %.2f\n", sa.getTotalDeposits());
-        System.out.printf("Total Withdrawals: %.2f\n", sa.getTotalWithdrawals());
-        System.out.printf("Total Interst: %.2f\n", sa.getTotalInterest());
-    }
+    
+     public static  void doExercise10() {
+     Scanner kb = new Scanner(System.in);
+     System.out.println("What is the annual interest rate? (eg- 0.013)");
+     double annualRate = kb.nextDouble();
+     System.out.println("What is the starting balance? (eg- 10000)");
+     double balance = kb.nextDouble();
+     SavingsAccount sa = new SavingsAccount(annualRate, balance);
+     System.out.println("How many months have passed since the account was "
+     + "established?");
+     int months = kb.nextInt();
+     double deposits = 0;
+     double withdrawals = 0;
+     for (int i = 1; i <= months; i++) {
+     System.out.println("How much was deposited in month " + i + "?");
+     double deposit = kb.nextDouble();
+     sa.deposit(deposit);
+     System.out.println("How much was withdrawn in month " + i + "?");
+     double withdrawal = kb.nextDouble();
+     sa.withdraw(withdrawal);
+     sa.calculateInterest();
+     }
+     System.out.printf("Ending Balance: %.2f\n", sa.getBalance());
+     System.out.printf("Total Deposits: %.2f\n", sa.getTotalDeposits());
+     System.out.printf("Total Withdrawals: %.2f\n", sa.getTotalWithdrawals());
+     System.out.printf("Total Interst: %.2f\n", sa.getTotalInterest());
+     }
 
-    public void doExercise11() throws IOException {
-        File dFile = new File("Deposits.txt");
-        Scanner deposits = new Scanner(dFile);
-        File wFile = new File("Withdrawals.txt");
-        Scanner withdrawals = new Scanner(wFile);
+     public void doExercise11() throws IOException {
+     File dFile = new File("Deposits.txt");
+     Scanner deposits = new Scanner(dFile);
+     File wFile = new File("Withdrawals.txt");
+     Scanner withdrawals = new Scanner(wFile);
 
-        SavingsAccount sa = new SavingsAccount(0.08, 500.00);
+     SavingsAccount sa = new SavingsAccount(0.08, 500.00);
 
-        while (deposits.hasNext()) {
-            sa.deposit(deposits.nextDouble());
-        }
-        while (withdrawals.hasNext()) {
-            sa.withdraw(withdrawals.nextDouble());
-        }
-        sa.calculateInterest();
-        System.out.printf("Ending Balance: %.2f\n", sa.getBalance());
-        System.out.printf("Total Interst: %.2f\n", sa.getTotalInterest());
-    }
+     while (deposits.hasNext()) {
+     sa.deposit(deposits.nextDouble());
+     }
+     while (withdrawals.hasNext()) {
+     sa.withdraw(withdrawals.nextDouble());
+     }
+     sa.calculateInterest();
+     System.out.printf("Ending Balance: %.2f\n", sa.getBalance());
+     System.out.printf("Total Interst: %.2f\n", sa.getTotalInterest());
+     }
+     
 }
